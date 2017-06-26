@@ -20,7 +20,7 @@ class TwitterPostController extends Controller
 
     public function getIndex()
     {
-        $access_token = Session::get('access_token');
+        $access_token = Session::get('twitter_access_token');
 //        $user_id        = Session::get('fb_user_id');
 //        $post_id        = Session::get('fb_post_id');
         $login_url = '';
@@ -31,8 +31,8 @@ class TwitterPostController extends Controller
         $force_login = false;
 
         if ($access_token == null) {
-            $token = Twitter::getRequestToken(route('twitter.callback'));
-            $login_url = Twitter::getAuthorizeURL($token, $sign_in_twitter, $force_login);
+//            $token = Twitter::getRequestToken(route('twitter.callback'));
+//            $login_url = Twitter::getAuthorizeURL($token, $sign_in_twitter, $force_login);
         }
         else
         {
@@ -54,7 +54,7 @@ class TwitterPostController extends Controller
 
         }
 
-        return View::make('twitter.index', compact('login_url'))->withTitle('Twitter Post');
+        return View::make('twitter.index')->withTitle('Twitter Post');
     }
     public function post()
     {
@@ -72,7 +72,9 @@ class TwitterPostController extends Controller
 
             if ($validator->passes()) {
 
-                $result = Twitter::postTweet(['status' => 'Laravel is beautiful', 'format' => 'json']);
+                $result = Twitter::postTweet(['status' => $input['twPost'], 'format' => 'json']);
+                print_r($result['user']['screen_name']);
+                die();
 
                 return redirect('/twitter')->with('message', 'post Successfully');
             }

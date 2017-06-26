@@ -162,6 +162,8 @@ Route::get('twitter/callback', ['as' => 'twitter.callback', function() {
             // Auth::login($user) should do the trick.
 
             Session::put('access_token', $token);
+            Session::put('twitter_access_token', $token);
+
 
             return Redirect::to('/twitter')->with('flash_notice', 'Congrats! You\'ve successfully signed in!');
         }

@@ -27,10 +27,10 @@
                     </div>
                 </div>
                 <div class="panel-footer">
-                    @if(Session::get('access_token')!=null)
+                    @if(Session::get('twitter_access_token')!=null)
                         <button type="submit" class="btn btn-primary pull-right" role="button">Post</button>
                     @else
-                        <a href="{{$login_url}}" class="pull-right">Login with Twitter</a>
+                        <a href="{{url('twitter/login')}}" class="pull-right">Login with Twitter</a>
                     @endif
                     <div class="clearfix"></div>
                 </div>
