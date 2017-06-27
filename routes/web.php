@@ -175,3 +175,7 @@ Route::get('twitter/callback', ['as' => 'twitter.callback', function() {
 Route::get('twitter/error', ['as' => 'twitter.error', function(){
     // Something went wrong, add your own error handling here
 }]);
+
+Route::get('Q1', 'emailController@getIndex')->name('question1');
+Route::post('Q1/post', 'emailController@sendEmail')->name('question1');
+
